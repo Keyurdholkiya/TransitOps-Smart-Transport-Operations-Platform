@@ -4,6 +4,7 @@ from typing import Literal
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -23,7 +24,7 @@ class Settings(BaseSettings):
     api_v1_prefix: str = "/api/v1"
 
     database_url: str = (
-    "postgresql+psycopg://transitops:transitops@127.0.0.1:5433/transitops"
+        "postgresql+psycopg://transitops:transitops@127.0.0.1:5433/transitops"
     )
 
     secret_key: str = Field(min_length=32)
@@ -45,6 +46,7 @@ class Settings(BaseSettings):
         "127.0.0.1",
         "testserver",
     ]
+
 
 @lru_cache
 def get_settings() -> Settings:

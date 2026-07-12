@@ -22,10 +22,12 @@ from app.middleware.security_headers import SecurityHeadersMiddleware
 
 configure_logging()
 
+
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     yield
     close_database_connection()
+
 
 app = FastAPI(
     title=settings.app_name,

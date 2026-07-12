@@ -4,6 +4,7 @@ from app.core.config import settings
 
 router = APIRouter(prefix="/info", tags=["Application"])
 
+
 @router.get("")
 def application_info() -> dict[str, str]:
     return {

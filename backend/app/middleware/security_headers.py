@@ -4,6 +4,7 @@ from starlette.responses import Response
 
 from app.core.config import settings
 
+
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     async def dispatch(
         self,

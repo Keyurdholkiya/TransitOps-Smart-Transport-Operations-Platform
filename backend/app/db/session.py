@@ -17,13 +17,16 @@ SessionLocal = sessionmaker(
     expire_on_commit=False,
 )
 
+
 def get_db_session() -> Generator[Session, None, None]:
     with SessionLocal() as session:
         yield session
 
+
 def check_database_connection() -> None:
     with engine.connect() as connection:
         connection.execute(text("SELECT 1"))
+
 
 def close_database_connection() -> None:
     engine.dispose()
