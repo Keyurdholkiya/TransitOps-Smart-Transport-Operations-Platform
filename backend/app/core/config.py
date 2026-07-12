@@ -25,13 +25,26 @@ class Settings(BaseSettings):
     database_url: str = (
     "postgresql+psycopg://transitops:transitops@127.0.0.1:5433/transitops"
     )
-    
+
     secret_key: str = Field(min_length=32)
 
     allowed_origins: list[str] = [
         "http://localhost:5173",
     ]
 
+    log_level: Literal[
+        "DEBUG",
+        "INFO",
+        "WARNING",
+        "ERROR",
+        "CRITICAL",
+    ] = "INFO"
+
+    allowed_hosts: list[str] = [
+        "localhost",
+        "127.0.0.1",
+        "testserver",
+    ]
 
 @lru_cache
 def get_settings() -> Settings:
