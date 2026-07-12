@@ -36,7 +36,6 @@ class Role(TimestampMixin, Base):
             values_callable=lambda enum_class: [member.value for member in enum_class],
         ),
         unique=True,
-        index=True,
         nullable=False,
     )
     description: Mapped[str] = mapped_column(
