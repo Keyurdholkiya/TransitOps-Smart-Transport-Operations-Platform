@@ -56,60 +56,58 @@ window.TransitOpsPages.fuel = {
   togglePanel(panelId) {
     const panel = TransitOpsUI.$(panelId);
     const otherPanel = TransitOpsUI.$(panelId === '#fuelEntryPanel' ? '#expenseEntryPanel' : '#fuelEntryPanel');
-    otherPanel.hidden = true;
-    panel.hidden = !panel.hidden;
-  render() {
-    const { $, esc, dateText, money, setEmpty } = TransitOpsUI;
-    const data = TransitOpsData.get();
-    const vs = TransitOpsData.vehiclesById(data);
-    const records = [
-      ...data.fuel.map(x => ({ ...x, kind: 'Fuel' })),
-      ...data.expenses.map(x => ({ ...x, kind: x.type }))
-    ].sort((a, b) => b.date.localeCompare(a.date));
-
-    $('#expenseRows').innerHTML = records.map(x =>
-      `<tr><td>${esc(x.kind)}</td><td>${esc(vs[x.vehicleId]?.registration || 'Deleted')}</td>` +
-      `<td>${dateText(x.date)}</td><td>${x.liters ? `${x.liters} L` : '—'}</td>` +
-      `<td>${money(x.cost)}</td>` +
-      `<td><button class="danger-btn" data-cost-delete="${x.kind === 'Fuel' ? 'fuel' : 'expense'}:${x.id}">Delete</button></td></tr>`
-    ).join('');
-    setEmpty('#expenseRows', '#expenseEmpty', records.length > 0);
+    if (otherPanel) otherPanel.hidden = true;
+    if (panel) panel.hidden = !panel.hidden;
   },
 
   init() {
+    const { showNotice, fillVehicleSelect } = TransitOpsUI;
+    this.ensureReferenceData();
     const { $, showNotice, fillVehicleSelect } = TransitOpsUI;
     fillVehicleSelect('#fuelVehicle');
     fillVehicleSelect('#expenseVehicle');
     this.render();
 
-    $('#showFuelForm').addEventListener('click', () => this.togglePanel('#fuelEntryPanel'));
-    $('#showExpenseForm').addEventListener('click', () => this.togglePanel('#expenseEntryPanel'));
+    TransitOpsUI.$('#showFuelForm').addEventListener('click', () => this.togglePanel('#fuelEntryPanel'));
+    TransitOpsUI.$('#showExpenseForm').addEventListener('click', () => this.togglePanel('#expenseEntryPanel'));
     document.querySelectorAll('[data-close-entry]').forEach(button => button.addEventListener('click', event => {
       event.currentTarget.closest('.fuel-entry-panel').hidden = true;
     }));
 
-    $('#fuelForm').addEventListener('submit', event => {
+    TransitOpsUI.$('#fuelForm').addEventListener('submit', event => {
       event.preventDefault();
       const data = TransitOpsData.get();
-      if (!$('#fuelVehicle').value) return showNotice('#fuelNotice', 'Select a vehicle first.', true);
+      if (!TransitOpsUI.$('#fuelVehicle').value) return showNotice('#fuelNotice', 'Select a vehicle first.', true);
       data.fuel.push({
-        id: TransitOpsUtils.createId(), vehicleId: $('#fuelVehicle').value, date: $('#fuelDate').value,
-        liters: Number($('#fuelLiters').value), cost: Number($('#fuelCost').value)
+        id: TransitOpsUtils.createId(),
+        vehicleId: TransitOpsUI.$('#fuelVehicle').value,
+        date: TransitOpsUI.$('#fuelDate').value,
+        liters: Number(TransitOpsUI.$('#fuelLiters').value),
+        cost: Number(TransitOpsUI.$('#fuelCost').value)
       });
       TransitOpsData.save(data);
-      $('#fuelForm').reset();
-      $('#fuelEntryPanel').hidden = true;
+      TransitOpsUI.$('#fuelForm').reset();
+      TransitOpsUI.$('#fuelEntryPanel').hidden = true;
       this.render();
+      showNotice('#fuelNotice', 'Fuel log saved.');
       showNotice('#fuelNotice', 'Fuel log saved.');
     });
 
-    $('#expenseForm').addEventListener('submit', event => {
+    TransitOpsUI.$('#expenseForm').addEventListener('submit', event => {
       event.preventDefault();
       const data = TransitOpsData.get();
+      if (!TransitOpsUI.$('#expenseVehicle').value) return showNotice('#expenseNotice', 'Select a vehicle first.', true);
       if (!$('#expenseVehicle').value) return showNotice('#expenseNotice', 'Select a vehicle first.', true);
       const cost = Number($('#expenseCost').value);
       const type = $('#expenseType').value;
       data.expenses.push({
+        id: TransitOpsUtils.createId(),
+        vehicleId: TransitOpsUI.$('#expenseVehicle').value,
+        date: TransitOpsUI.$('#expenseDate').value,
+        type: TransitOpsUI.$('#expenseType').value,
+        cost: Number(TransitOpsUI.$('#expenseCost').value)
+      });
+      data.settings.referenceFuelDemo = false;
         id: TransitOpsUtils.createId(),
         vehicleId: $('#expenseVehicle').value,
         date: $('#expenseDate').value,
@@ -120,9 +118,10 @@ window.TransitOpsPages.fuel = {
         status: 'Completed'
       });
       TransitOpsData.save(data);
-      $('#expenseForm').reset();
-      $('#expenseEntryPanel').hidden = true;
+      TransitOpsUI.$('#expenseForm').reset();
+      TransitOpsUI.$('#expenseEntryPanel').hidden = true;
       this.render();
+      showNotice('#expenseNotice', 'Expense saved.');
       showNotice('#expenseNotice', 'Expense saved.');
     });
 
@@ -134,6 +133,7 @@ window.TransitOpsPages.fuel = {
       const data = TransitOpsData.get();
       const key = type === 'fuel' ? 'fuel' : 'expenses';
       data[key] = data[key].filter(record => record.id !== recordId);
+      data.settings.referenceFuelDemo = false;
       TransitOpsData.save(data);
       this.render();
     });

@@ -4,78 +4,268 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>TransitOps | Fuel &amp; Expenses</title>
+  <title>TransitOps | Fuel & Expenses</title>
   <link rel="stylesheet" href="css/global.css">
 </head>
 
 <body data-page="fuel">
   <div class="app">
+
+    <aside class="sidebar">
+      <div class="brand">Transi<b>Ops</b></div>
+
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="vehicles.html">Vehicles</a>
+        <a href="drivers.html">Drivers</a>
+        <a href="trips.html">Trips</a>
+        <a href="maintenance.html">Maintenance</a>
+        <a class="active" href="fuel.html">Fuel & Expenses</a>
+        <a href="analytics.html">Reports</a>
+        <a href="settings.html">Settings</a>
+      </nav>
+    </aside>
+
     <aside class="sidebar"><div class="brand">Transi<b>Ops</b></div><nav class="nav"><a href="dashboard.html">Dashboard</a><a href="vehicles.html">Vehicles</a><a href="drivers.html">Drivers</a><a href="trips.html">Trips</a><a href="maintenance.html">Maintenance</a><a href="fuel.html" class="active">Fuel & Expenses</a><a href="analytics.html">Reports</a><a href="settings.html">Settings</a></nav></aside>
     <main class="main">
+
       <header class="topbar">
         <input class="search" placeholder="Search..." data-search="fuel">
-        <div class="user" id="currentRole">Role: &mdash; <span class="avatar">T</span></div>
+        <div class="user" id="currentRole">
+          Role: &mdash; <span class="avatar">T</span>
+        </div>
       </header>
 
       <section class="page fuel-page">
+
         <div class="fuel-section-heading">
           <h1>Fuel Logs</h1>
+
           <div class="fuel-actions">
             <button class="button" type="button" id="showFuelForm">+ Log Fuel</button>
             <button class="button" type="button" id="showExpenseForm">+ Add Expense</button>
           </div>
         </div>
 
+        <!-- Fuel Entry Form -->
         <div id="fuelEntryPanel" class="fuel-entry-panel" hidden>
+
           <form id="fuelForm" class="compact-entry-form">
-            <div class="form-heading"><h2>Log Fuel</h2><button class="close-entry" type="button" data-close-entry>&times;</button></div>
+
+            <div class="form-heading">
+              <h2>Log Fuel</h2>
+              <button class="close-entry" type="button" data-close-entry>&times;</button>
+            </div>
+
             <div id="fuelNotice" class="notice"></div>
+
             <div class="compact-fields">
-              <div class="field"><label>Vehicle *</label><select id="fuelVehicle" required></select></div>
-              <div class="field"><label>Date *</label><input id="fuelDate" type="date" required></div>
-              <div class="field"><label>Liters *</label><input id="fuelLiters" type="number" min="0.01" step="0.01" required></div>
-              <div class="field"><label>Fuel cost *</label><input id="fuelCost" type="number" min="0" required></div>
-              <button class="button" type="submit">Save Fuel</button>
+
+              <div class="field">
+                <label>Vehicle *</label>
+                <select id="fuelVehicle" required></select>
+              </div>
+
+              <div class="field">
+                <label>Date *</label>
+                <input id="fuelDate" type="date" required>
+              </div>
+
+              <div class="field">
+                <label>Liters *</label>
+                <input id="fuelLiters" type="number" min="0.01" step="0.01" required>
+              </div>
+
+              <div class="field">
+                <label>Fuel Cost *</label>
+                <input id="fuelCost" type="number" min="0" required>
+              </div>
+
+              <button class="button" type="submit">
+                Save Fuel
+              </button>
+
             </div>
+
           </form>
+
         </div>
 
+        <!-- Expense Entry Form -->
         <div id="expenseEntryPanel" class="fuel-entry-panel" hidden>
+
           <form id="expenseForm" class="compact-entry-form">
-            <div class="form-heading"><h2>Add Expense</h2><button class="close-entry" type="button" data-close-entry>&times;</button></div>
-            <div id="expenseNotice" class="notice"></div>
-            <div class="compact-fields">
-              <div class="field"><label>Vehicle *</label><select id="expenseVehicle" required></select></div>
-              <div class="field"><label>Date *</label><input id="expenseDate" type="date" required></div>
-              <div class="field"><label>Expense type *</label><select id="expenseType"><option>Toll</option><option>Parking</option><option>Permit</option><option>Other</option></select></div>
-              <div class="field"><label>Cost *</label><input id="expenseCost" type="number" min="0" required></div>
-              <button class="button" type="submit">Save Expense</button>
+
+            <div class="form-heading">
+              <h2>Add Expense</h2>
+              <button class="close-entry" type="button" data-close-entry>&times;</button>
             </div>
+
+            <div id="expenseNotice" class="notice"></div>
+
+            <div class="compact-fields">
+
+              <div class="field">
+                <label>Vehicle *</label>
+                <select id="expenseVehicle" required></select>
+              </div>
+
+              <div class="field">
+                <label>Date *</label>
+                <input id="expenseDate" type="date" required>
+              </div>
+
+              <div class="field">
+                <label>Expense Type *</label>
+                <select id="expenseType">
+                  <option>Toll</option>
+                  <option>Parking</option>
+                  <option>Permit</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Cost *</label>
+                <input id="expenseCost" type="number" min="0" required>
+              </div>
+
+              <button class="button" type="submit">
+                Save Expense
+              </button>
+
+            </div>
+
           </form>
+
         </div>
 
+        <!-- Fuel Table -->
         <div class="fuel-table-wrap">
+
           <table class="fuel-table">
+
+            <thead>
+              <tr>
+                <th>Vehicle</th>
+                <th>Date</th>
+                <th>Liters</th>
+                <th>Fuel Cost</th>
+              </tr>
+            </thead>
+
+            <tbody id="fuelRows">
+
+              <tr>
+                <td>Bus MH12AB1234</td>
+                <td>12-07-2026</td>
+                <td>60 L</td>
+                <td>₹6,000</td>
+              </tr>
+
+              <tr>
+                <td>Truck GJ01CD5678</td>
+                <td>11-07-2026</td>
+                <td>85 L</td>
+                <td>₹8,500</td>
+              </tr>
+
+              <tr>
+                <td>Van DL05EF9012</td>
+                <td>10-07-2026</td>
+                <td>40 L</td>
+                <td>₹4,200</td>
+              </tr>
+
+            </tbody>
+
             <thead><tr><th>Vehicle</th><th>Date</th><th>Liters</th><th>Fuel cost</th><th>Actions</th></tr></thead>
             <tbody id="fuelRows"></tbody>
           </table>
-          <div id="fuelEmpty" class="fuel-empty">No fuel logs yet. Use <b>+ Log Fuel</b> to add your first record.</div>
+
         </div>
 
+        <!-- Other Expenses -->
         <section class="expense-section">
+
           <h2>Other Expenses (Toll / Misc)</h2>
+
+          <div class="fuel-table-wrap">
+
            <div class="fuel-table-wrap">
             <table class="fuel-table expense-table">
+
+              <thead>
+                <tr>
+                  <th>Trip / Ref</th>
+                  <th>Vehicle</th>
+                  <th>Toll</th>
+                  <th>Other</th>
+                  <th>Maint. (Linked)</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody id="otherExpenseRows">
+
+                <tr>
+                  <td>TRIP-1001</td>
+                  <td>Bus MH12AB1234</td>
+                  <td>₹250</td>
+                  <td>₹150</td>
+                  <td>₹800</td>
+                  <td>₹1,200</td>
+                  <td style="color:green;font-weight:bold;">Paid</td>
+                </tr>
+
+                <tr>
+                  <td>TRIP-1002</td>
+                  <td>Truck GJ01CD5678</td>
+                  <td>₹400</td>
+                  <td>₹350</td>
+                  <td>₹1,200</td>
+                  <td>₹1,950</td>
+                  <td style="color:orange;font-weight:bold;">Pending</td>
+                </tr>
+
+                <tr>
+                  <td>TRIP-1003</td>
+                  <td>Van DL05EF9012</td>
+                  <td>₹150</td>
+                  <td>₹200</td>
+                  <td>₹500</td>
+                  <td>₹850</td>
+                  <td style="color:green;font-weight:bold;">Paid</td>
+                </tr>
+
+              </tbody>
+
               <thead><tr><th>Trip / Ref</th><th>Vehicle</th><th>Toll</th><th>Other</th><th>Maint. (linked)</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
               <tbody id="otherExpenseRows"></tbody>
             </table>
-            <div id="expenseEmpty" class="fuel-empty">No other expenses recorded.</div>
+
           </div>
+
         </section>
 
-        <div class="fuel-total"><b>Total operational cost (auto)</b><span>= Fuel + Maint. + Other</span><strong id="operationalTotal">&#8377;0</strong></div>
+        <!-- Total Cost -->
+        <div class="fuel-total">
+
+          <b>Total Operational Cost (Auto)</b>
+
+          <span>= Fuel + Maint. + Other</span>
+
+          <strong id="operationalTotal">
+            ₹17,500
+          </strong>
+
+        </div>
+
       </section>
+
     </main>
+
   </div>
 
   <script src="js/config.js"></script>
@@ -88,6 +278,7 @@
   <script src="js/trips.js"></script>
   <script src="js/pages/fuel.js"></script>
   <script src="js/app.js"></script>
+
 </body>
 
 </html>

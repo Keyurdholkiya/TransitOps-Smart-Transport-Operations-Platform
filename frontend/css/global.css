@@ -1080,6 +1080,8 @@ body[data-page="analytics"] .costly-row strong { display: none; }
 body[data-page="analytics"] .cost-track { grid-column: 2; height: 12px; }
 body[data-page="analytics"] .analytics-empty { max-width: 495px; }
 
+/* Full-width fuel and expenses ledger. */
+/*body[data-page="fuel"] .app { display: block; }*/
 /* Fuel and expenses ledger (sidebar retained). */
 body[data-page="fuel"] .topbar { height: 54px; padding: 0 21px; }
 body[data-page="fuel"] .topbar .search { width: 255px; }
