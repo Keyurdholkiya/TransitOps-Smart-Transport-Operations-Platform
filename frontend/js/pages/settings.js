@@ -13,6 +13,7 @@ window.TransitOpsPages.settings = {
       e.preventDefault();
       const data = TransitOpsData.get();
       data.settings = {
+        ...data.settings,
         organizationName: $('#organizationName').value.trim(),
         timezone: $('#timezone').value,
         language: $('#language').value

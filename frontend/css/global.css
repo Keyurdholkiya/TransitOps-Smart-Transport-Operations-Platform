@@ -1052,8 +1052,7 @@ body[data-page="settings"] .table-card td {
 .analytics-empty { color: #8d99a2; font-size: 10px; line-height: 1.5; margin-top: 35px; text-align: center; }
 .analytics-empty b { color: #cdd4da; display: block; font-size: 11px; }
 
-/* Compact, full-width reports layout. */
-body[data-page="analytics"] .app { display: block; }
+/* Compact reports layout (sidebar retained). */
 body[data-page="analytics"] .topbar { height: 49px; padding: 0 14px; }
 body[data-page="analytics"] .topbar .search { width: 245px; }
 body[data-page="analytics"] .page { padding: 16px 14px 30px; }
@@ -1081,8 +1080,7 @@ body[data-page="analytics"] .costly-row strong { display: none; }
 body[data-page="analytics"] .cost-track { grid-column: 2; height: 12px; }
 body[data-page="analytics"] .analytics-empty { max-width: 495px; }
 
-/* Full-width fuel and expenses ledger. */
-body[data-page="fuel"] .app { display: block; }
+/* Fuel and expenses ledger (sidebar retained). */
 body[data-page="fuel"] .topbar { height: 54px; padding: 0 21px; }
 body[data-page="fuel"] .topbar .search { width: 255px; }
 body[data-page="fuel"] .page { padding: 18px 22px 35px; }

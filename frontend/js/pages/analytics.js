@@ -102,6 +102,6 @@ window.TransitOpsPages.analytics = {
   init() {
     const { $ } = TransitOpsUI;
     this.render();
-    $('#exportCsv')?.addEventListener('click', () => this.exportCsv());
+    $('#exportCsv').addEventListener('click', () => this.exportCsv());
   }
 };

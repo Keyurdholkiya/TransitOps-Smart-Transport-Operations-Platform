@@ -3,6 +3,7 @@
   if (!TransitOpsUI.setupHeader()) return;
 
   TransitOpsUI.setupSearch();
+  TransitOpsData.ensureReferenceData();
 
   const page = document.body.dataset.page;
   const pages = window.TransitOpsPages || {};
