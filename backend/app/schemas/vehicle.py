@@ -149,3 +149,12 @@ class VehicleResponse(BaseModel):
     status: VehicleStatus
     created_at: datetime
     updated_at: datetime
+
+
+class VehicleListResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    items: list[VehicleResponse]
+    total: int
+    offset: int
+    limit: int
