@@ -79,6 +79,32 @@ window.TransitOpsPages.analytics = {
 
     this.renderActivityChart(data);
     this.renderCostlyVehicles(rows);
+  render() {
+    const { $, esc, money, setEmpty } = TransitOpsUI;
+    const rows = this.reportData();
+    const totalCost = rows.reduce((sum, x) => sum + x.cost, 0);
+    const totalFuel = rows.reduce((sum, x) => sum + x.liters, 0);
+    const totalDistance = rows.reduce((sum, x) => sum + x.distance, 0);
+    const totalVehicles = rows.length;
+    const onTrip = rows.filter(x => x.vehicle.status === 'On Trip').length;
+
+    $('#reportCost').textContent = money(totalCost);
+    $('#reportEfficiency').textContent = totalFuel ? `${(totalDistance / totalFuel).toFixed(2)} km/L` : '—';
+    $('#reportUtilization').textContent = totalVehicles ? `${Math.round(onTrip / totalVehicles * 100)}%` : '0%';
+    $('#reportDistance').textContent = `${totalDistance} km`;
+    $('#reportFuel').textContent = `${totalFuel} L`;
+    $('#reportRoi').textContent = rows.length
+      ? `${(rows.reduce((sum, x) => sum + x.roi, 0) / rows.length).toFixed(2)}%`
+      : '—';
+
+    $('#reportRows').innerHTML = rows.map(x =>
+      `<tr><td>${esc(x.vehicle.registration)} · ${esc(x.vehicle.name)}</td>` +
+      `<td>${money(x.fuelCost)}</td><td>${money(x.maintenanceCost)}</td>` +
+      `<td>${money(x.otherCost)}</td><td>${money(x.cost)}</td>` +
+      `<td>${x.liters ? `${(x.distance / x.liters).toFixed(2)} km/L` : '—'}</td>` +
+      `<td>${x.roi.toFixed(2)}%</td></tr>`
+    ).join('');
+    setEmpty('#reportRows', '#reportEmpty', rows.length > 0);
   },
 
   exportCsv() {
@@ -87,6 +113,11 @@ window.TransitOpsPages.analytics = {
     const values = rows.map(row => [
       row.vehicle.registration, row.vehicle.name, row.fuelCost, row.maintenanceCost,
       row.otherCost, row.cost, row.liters ? (row.distance / row.liters).toFixed(2) : '', row.roi.toFixed(2)
+    const header = ['Registration', 'Vehicle', 'Fuel Cost', 'Maintenance Cost',
+      'Other Expense', 'Operational Cost', 'Fuel Efficiency', 'ROI'];
+    const values = rows.map(x => [
+      x.vehicle.registration, x.vehicle.name, x.fuelCost, x.maintenanceCost,
+      x.otherCost, x.cost, x.liters ? (x.distance / x.liters).toFixed(2) : '', x.roi.toFixed(2)
     ]);
     const csv = [header, ...values]
       .map(row => row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(','))
@@ -103,5 +134,6 @@ window.TransitOpsPages.analytics = {
     const { $ } = TransitOpsUI;
     this.render();
     $('#exportCsv')?.addEventListener('click', () => this.exportCsv());
+    $('#exportCsv').addEventListener('click', () => this.exportCsv());
   }
 };
