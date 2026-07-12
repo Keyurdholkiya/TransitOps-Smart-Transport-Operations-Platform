@@ -854,3 +854,35 @@ Apply migrations with:
 ```powershell
 uv run alembic upgrade head
 ```
+
+## Phase 4: Trips and Dispatch Operations
+
+Phase 4 introduces transactional trip planning and dispatch management.
+
+### Trip functionality
+
+TransitOps supports:
+
+- Creating planned trips
+- Unique normalized trip numbers
+- Vehicle and driver assignment
+- Cargo capacity validation
+- Trip listing and filtering
+- Trip detail retrieval
+- Transactional dispatch
+- Transactional completion
+- Planned and active-trip cancellation
+- Final odometer updates
+- UTC operation timestamps
+- PostgreSQL row locking
+- Database-level active-assignment protection
+
+### Trip lifecycle
+
+Trips use the following lifecycle:
+
+```text
+Planned → In Progress → Completed
+   │            │
+   └────────────┴────→ Cancelled
+```
