@@ -176,3 +176,12 @@ class DriverResponse(BaseModel):
     status: DriverStatus
     created_at: datetime
     updated_at: datetime
+
+
+class DriverListResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    items: list[DriverResponse]
+    total: int
+    offset: int
+    limit: int
