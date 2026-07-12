@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: transitops-frontend
+    ports:
+      - "${PORT:-8080}:80"
+    restart: unless-stopped
