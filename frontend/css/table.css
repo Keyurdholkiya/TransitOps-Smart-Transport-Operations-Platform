@@ -1,0 +1,42 @@
+.table-card {
+  overflow-x: auto;
+  padding: 17px 16px;
+}
+
+.table-card table {
+  border-collapse: collapse;
+  min-width: 620px;
+  width: 100%;
+}
+
+.table-card th {
+  color: #9099a2;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 0 0 12px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.table-card td {
+  border-top: 1px solid #252b31;
+  color: #dbe0e4;
+  font-size: 11px;
+  padding: 10px 0;
+  white-space: nowrap;
+}
+
+.badge {
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  min-width: 58px;
+  padding: 4px 9px;
+  text-align: center;
+}
+
+.table-actions {
+  display: flex;
+  gap: 6px;
+}

@@ -1,1 +1,79 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TransitOps | Drivers</title><link rel="stylesheet" href="css/global.css"></head><body data-page="drivers"><div class="app"><aside class="sidebar"><div class="brand">Transi<b>Ops</b></div><nav class="nav"><a href="dashboard.html">Dashboard</a><a href="vehicles.html">Vehicles</a><a class="active" href="drivers.html">Drivers</a><a href="trips.html">Trips</a><a href="maintenance.html">Maintenance</a><a href="fuel.html">Fuel & Expenses</a><a href="analytics.html">Reports</a><a href="settings.html">Settings</a></nav></aside><main class="main"><header class="topbar"><input class="search" placeholder="Search driver..." data-search="driver"><div class="user" id="currentRole">Role: — <span class="avatar">T</span></div></header><section class="page"><div class="page-head"><div><h1>Driver Management</h1><p>Maintain compliance, license validity, availability and safety records.</p></div></div><div class="management"><form id="driverForm" class="card form-card"><h2 id="driverFormTitle">Add Driver</h2><input type="hidden" id="driverId"><div id="driverNotice" class="notice"></div><div class="form-grid"><div class="field"><label>Full name *</label><input id="driverName" required></div><div class="field"><label>License number *</label><input id="licenseNumber" required></div><div class="field"><label>License category *</label><input id="licenseCategory" placeholder="LMV / HMV" required></div><div class="field"><label>License expiry *</label><input id="licenseExpiry" type="date" required></div><div class="field"><label>Contact number *</label><input id="driverContact" required></div><div class="field"><label>Safety score (%) *</label><input id="safetyScore" type="number" min="0" max="100" required></div><div class="field"><label>Status *</label><select id="driverState"><option>Available</option><option>Off Duty</option><option>Suspended</option></select></div><button class="button" type="submit">Save Driver</button><button class="button gray" type="button" id="driverCancel" hidden>Cancel edit</button></div></form><section class="card table-card"><h2 class="section-title">Driver profiles</h2><table><thead><tr><th>Name</th><th>License</th><th>Category</th><th>Expiry</th><th>Contact</th><th>Safety</th><th>Status</th><th>Actions</th></tr></thead><tbody id="driverRows"></tbody></table><div id="driverEmpty" class="empty-state"><b>No drivers added</b>Add a driver with a valid license to use them for dispatch.</div></section></div></section></main></div><script src="js/app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TransitOps | Drivers</title>
+  <link rel="stylesheet" href="css/global.css">
+</head>
+
+<body data-page="drivers">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">Transi<b>Ops</b></div>
+      <nav class="nav"><a href="dashboard.html">Dashboard</a><a href="vehicles.html">Vehicles</a><a class="active"
+          href="drivers.html">Drivers</a><a href="trips.html">Trips</a><a href="maintenance.html">Maintenance</a><a
+          href="fuel.html">Fuel & Expenses</a><a href="analytics.html">Reports</a><a href="settings.html">Settings</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <header class="topbar"><input class="search" placeholder="Search driver..." data-search="driver">
+        <div class="user" id="currentRole">Role: — <span class="avatar">T</span></div>
+      </header>
+      <section class="page">
+        <div class="page-head">
+          <div>
+            <h1>Driver Management</h1>
+            <p>Maintain compliance, license validity, availability and safety records.</p>
+          </div>
+        </div>
+        <div class="management">
+          <form id="driverForm" class="card form-card">
+            <h2 id="driverFormTitle">Add Driver</h2><input type="hidden" id="driverId">
+            <div id="driverNotice" class="notice"></div>
+            <div class="form-grid">
+              <div class="field"><label>Full name *</label><input id="driverName" required></div>
+              <div class="field"><label>License number *</label><input id="licenseNumber" required></div>
+              <div class="field"><label>License category *</label><input id="licenseCategory" placeholder="LMV / HMV"
+                  required></div>
+              <div class="field"><label>License expiry *</label><input id="licenseExpiry" type="date" required></div>
+              <div class="field"><label>Contact number *</label><input id="driverContact" required></div>
+              <div class="field"><label>Safety score (%) *</label><input id="safetyScore" type="number" min="0"
+                  max="100" required></div>
+              <div class="field"><label>Status *</label><select id="driverState">
+                  <option>Available</option>
+                  <option>Off Duty</option>
+                  <option>Suspended</option>
+                </select></div><button class="button" type="submit">Save Driver</button><button class="button gray"
+                type="button" id="driverCancel" hidden>Cancel edit</button>
+            </div>
+          </form>
+          <section class="card table-card">
+            <h2 class="section-title">Driver profiles</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>License</th>
+                  <th>Category</th>
+                  <th>Expiry</th>
+                  <th>Contact</th>
+                  <th>Safety</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="driverRows"></tbody>
+            </table>
+            <div id="driverEmpty" class="empty-state"><b>No drivers added</b>Add a driver with a valid license to use
+              them for dispatch.</div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
