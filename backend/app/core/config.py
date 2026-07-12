@@ -29,6 +29,15 @@ class Settings(BaseSettings):
 
     secret_key: str = Field(min_length=32)
 
+    jwt_algorithm: Literal["HS256"] = "HS256"
+    jwt_issuer: str = "transitops-api"
+    jwt_audience: str = "transitops-web"
+    access_token_expire_minutes: int = Field(
+        default=30,
+        ge=5,
+        le=1440,
+    )
+
     allowed_origins: list[str] = [
         "http://localhost:5173",
     ]
