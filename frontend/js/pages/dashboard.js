@@ -3,6 +3,7 @@ window.TransitOpsPages = window.TransitOpsPages || {};
 window.TransitOpsPages.dashboard = {
   init() {
     const { $, esc, badge } = TransitOpsUI;
+    const data = TransitOpsData.get();
     const vs = TransitOpsData.vehiclesById(data);
     const ds = TransitOpsData.driversById(data);
 
