@@ -1,0 +1,58 @@
+.form-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.field label {
+  color: #a8b0b9;
+  display: block;
+  font-size: 9px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.field input,
+.field select,
+.field textarea {
+  background: #0c1014;
+  border: 1px solid #39414b;
+  border-radius: 3px;
+  color: #dce1e5;
+  font: inherit;
+  font-size: 11px;
+  min-height: 34px;
+  padding: 8px 9px;
+  width: 100%;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: #f59b13;
+  outline: none;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 13px;
+}
+
+.form-actions .button {
+  flex: 1;
+}
+
+.notice {
+  background: #13251a;
+  border-radius: 4px;
+  color: #82dca0;
+  display: none;
+  font-size: 11px;
+  margin-bottom: 15px;
+  padding: 10px 12px;
+}
+
+.notice.error {
+  background: #321a1c;
+  color: #ff9e9e;
+}

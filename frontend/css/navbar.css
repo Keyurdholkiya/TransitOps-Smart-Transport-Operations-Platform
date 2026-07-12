@@ -1,0 +1,46 @@
+.topbar {
+  align-items: center;
+  background: #101419;
+  border-bottom: 1px solid #2a3037;
+  display: flex;
+  height: 70px;
+  justify-content: space-between;
+  padding: 0 27px;
+}
+
+.search {
+  background: #0a0d10;
+  border: 1px solid #303740;
+  border-radius: 4px;
+  color: #e4e9ec;
+  font-size: 11px;
+  height: 31px;
+  padding: 0 10px;
+  width: 205px;
+}
+
+.search:focus {
+  border-color: #f59b13;
+  outline: none;
+}
+
+.user {
+  align-items: center;
+  color: #c9d0d6;
+  display: flex;
+  font-size: 11px;
+  gap: 12px;
+}
+
+.avatar {
+  align-items: center;
+  background: #4b9ce4;
+  border-radius: 50%;
+  color: #10263d;
+  display: flex;
+  font-size: 11px;
+  font-weight: 800;
+  height: 28px;
+  justify-content: center;
+  min-width: 28px;
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TransitOps | Trip Dispatcher</title>
+  <link rel="stylesheet" href="css/global.css">
+</head>
+<body data-page="trips">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">Transi<b>Ops</b></div>
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a><a href="vehicles.html">Vehicles</a><a href="drivers.html">Drivers</a><a class="active" href="trips.html">Trips</a><a href="maintenance.html">Maintenance</a><a href="fuel.html">Fuel & Expenses</a><a href="analytics.html">Reports</a><a href="settings.html">Settings</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <header class="topbar"><input class="search" placeholder="Search trip..."><div class="user" id="currentRole">Role: — <span class="avatar">T</span></div></header>
+      <section class="page">
+        <div class="page-head"><div><h1>Trip Dispatcher</h1><p>Create a trip only when every operational rule passes.</p></div></div>
+        <div class="dispatcher">
+          <form id="tripForm" class="card form-card">
+            <div class="steps"><span class="step active">Draft</span><span class="step">Dispatched</span><span class="step">Completed</span><span class="step">Cancelled</span></div>
+            <h2>Create Trip</h2><div id="tripNotice" class="notice"></div>
+            <div class="form-grid">
+              <div class="field"><label>Source *</label><input id="tripSource" placeholder="e.g. Ahmedabad" required></div>
+              <div class="field"><label>Destination *</label><input id="tripDestination" placeholder="e.g. Surat" required></div>
+              <div class="field"><label>Available vehicle *</label><select id="tripVehicle" required></select></div>
+              <div class="field"><label>Available driver *</label><select id="tripDriver" required></select></div>
+              <div class="field"><label>Cargo weight (kg) *</label><input id="tripCargo" type="number" min="1" placeholder="0" required></div>
+              <div class="field"><label>Planned distance (km) *</label><input id="tripDistance" type="number" min="1" placeholder="0" required></div>
+              <div class="form-actions"><button class="button gray" type="button" id="saveDraft">Save Draft</button><button class="button blue" type="submit" id="dispatchBtn">Dispatch Trip</button></div>
+            </div>
+          </form>
+          <aside class="card validation-card">
+            <div class="live-title"><h3>DISPATCH VALIDATION</h3><span class="muted">Live checks</span></div>
+            <div class="rule-check" id="vehicleRule"><span class="rule-icon">○</span><div><strong>Vehicle is available</strong><p>Select a vehicle with Available status.</p></div><b>Waiting</b></div>
+            <div class="rule-check" id="driverRule"><span class="rule-icon">○</span><div><strong>Driver is available</strong><p>Driver must not already be on a trip.</p></div><b>Waiting</b></div>
+            <div class="rule-check" id="licenseRule"><span class="rule-icon">○</span><div><strong>License is valid</strong><p>Expired or suspended drivers cannot be assigned.</p></div><b>Waiting</b></div>
+            <div class="rule-check" id="cargoRule"><span class="rule-icon">○</span><div><strong>Cargo fits capacity</strong><p id="cargoRuleText">Enter cargo weight to check capacity.</p></div><b>Waiting</b></div>
+            <div class="estimate"><h3>WHEN YOU DISPATCH</h3><p>The trip becomes <b>Dispatched</b>; both selected vehicle and driver automatically become <b>On Trip</b>.</p></div>
+          </aside>
+        </div>
+        <section class="card table-card trip-list"><h2 class="section-title">Trip lifecycle</h2><table><thead><tr><th>Trip</th><th>Route</th><th>Vehicle</th><th>Driver</th><th>Cargo</th><th>Distance</th><th>Status</th><th>Actions</th></tr></thead><tbody id="tripRows"></tbody></table><div id="tripEmpty" class="empty-state"><b>No trips created</b>Add an available vehicle and compliant driver, then create a trip.</div></section>
+      </section>
+    </main>
+  </div>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/vehicles.js"></script>
+  <script src="js/drivers.js"></script>
+  <script src="js/trips.js"></script>
+  <script src="js/pages/trips.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

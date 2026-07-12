@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TransitOps | Operations Dashboard</title><link rel="stylesheet" href="css/global.css"></head>
+<body data-page="dashboard">
+  <div class="app">
+    <aside class="sidebar"><div class="brand">Transi<b>Ops</b></div><nav class="nav"><a class="active" href="dashboard.html">Dashboard</a><a href="vehicles.html">Vehicles</a><a href="drivers.html">Drivers</a><a href="trips.html">Trips</a><a href="maintenance.html">Maintenance</a><a href="fuel.html">Fuel & Expenses</a><a href="analytics.html">Reports</a><a href="settings.html">Settings</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><input class="search" placeholder="Search records..."><div class="user" id="currentRole">Role: — <span class="avatar">T</span></div></header>
+      <section class="page">
+        <div class="page-head"><div><h1>Operations Dashboard</h1><p>Live fleet availability, dispatch readiness and safety compliance.</p></div><a class="button blue" href="trips.html">+ Dispatch a Trip</a></div>
+        <div class="filters"><select class="filter"><option>Vehicle Type: All</option></select><select class="filter"><option>Status: All</option></select><select class="filter"><option>Region: All</option></select></div>
+        <div class="stats"><article class="stat green"><span>Active vehicles</span><strong id="kpiActive">0</strong></article><article class="stat blue"><span>Available vehicles</span><strong id="kpiAvailable">0</strong></article><article class="stat orange"><span>In maintenance</span><strong id="kpiShop">0</strong></article><article class="stat green"><span>Active trips</span><strong id="kpiActiveTrips">0</strong></article><article class="stat yellow"><span>Pending trips</span><strong id="kpiPendingTrips">0</strong></article><article class="stat blue"><span>Drivers on duty</span><strong id="kpiDrivers">0</strong></article><article class="stat orange"><span>Fleet utilization</span><strong id="kpiUtilization">0%</strong></article></div>
+        <section class="decision-panel"><div class="decision-heading"><div><span class="eyebrow">DECISION INTELLIGENCE</span><h2>Dispatch readiness, explained</h2></div><span class="badge blue">Live</span></div><div class="decision-grid"><article><span class="decision-icon">✓</span><div><b id="readyResources">0 ready pair(s)</b><p>Available vehicle + compliant driver</p></div></article><article><span class="decision-icon warn">!</span><div><b id="licenseWatch">0 license alert(s)</b><p>Expired or expiring in the next 30 days</p></div></article><article><span class="decision-icon blue-dot">→</span><div><b id="nextAction">Add a vehicle and driver</b><p>Recommended next action</p></div></article></div></section>
+        <div class="split"><section><h2 class="section-title">Recent trips</h2><div class="card table-card"><table><thead><tr><th>Trip ID</th><th>Route</th><th>Vehicle</th><th>Driver</th><th>Lifecycle</th></tr></thead><tbody id="recentTrips"></tbody></table><div id="recentTripsEmpty" class="empty-state"><b>No trips yet</b>Create a vehicle and a driver, then dispatch your first trip.</div></div></section><section><h2 class="section-title">Vehicle status</h2><div class="card" id="vehicleStatus"></div></section></div>
+      </section>
+    </main>
+  </div>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/vehicles.js"></script>
+  <script src="js/drivers.js"></script>
+  <script src="js/trips.js"></script>
+  <script src="js/pages/dashboard.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
