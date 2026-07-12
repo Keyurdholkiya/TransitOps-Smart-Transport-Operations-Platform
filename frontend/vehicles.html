@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TransitOps | Vehicles</title>
+  <link rel="stylesheet" href="css/global.css">
+</head>
+
+<body data-page="vehicles">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">Transi<b>Ops</b></div>
+      <nav class="nav"><a href="dashboard.html">Dashboard</a><a class="active" href="vehicles.html">Vehicles</a><a
+          href="drivers.html">Drivers</a><a href="trips.html">Trips</a><a href="maintenance.html">Maintenance</a><a
+          href="fuel.html">Fuel & Expenses</a><a href="analytics.html">Reports</a><a href="settings.html">Settings</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <header class="topbar"><input class="search" placeholder="Search vehicle..." data-search="vehicle">
+        <div class="user" id="currentRole">Role: — <span class="avatar">T</span></div>
+      </header>
+      <section class="page">
+        <div class="page-head">
+          <div>
+            <h1>Vehicle Registry</h1>
+            <p>Add and manage every fleet asset. Registration number must be unique.</p>
+          </div>
+        </div>
+        <div class="management">
+          <form id="vehicleForm" class="card form-card">
+            <h2 id="vehicleFormTitle">Register Vehicle</h2><input type="hidden" id="vehicleId">
+            <div id="vehicleNotice" class="notice"></div>
+            <div class="form-grid">
+              <div class="field"><label>Registration number *</label><input id="registration" required></div>
+              <div class="field"><label>Vehicle name / model *</label><input id="vehicleName" required></div>
+              <div class="field"><label>Vehicle type *</label><input id="vehicleType" placeholder="Truck, Van, Bus..."
+                  required></div>
+              <div class="field"><label>Maximum load capacity (kg) *</label><input id="capacity" type="number" min="1"
+                  required></div>
+              <div class="field"><label>Odometer (km) *</label><input id="odometer" type="number" min="0" required>
+              </div>
+              <div class="field"><label>Acquisition cost (₹) *</label><input id="acquisitionCost" type="number" min="0"
+                  required></div>
+              <div class="field"><label>Status *</label><select id="vehicleState">
+                  <option>Available</option>
+                  <option>In Shop</option>
+                  <option>Retired</option>
+                </select></div><button class="button" type="submit">Save Vehicle</button><button class="button gray"
+                type="button" id="vehicleCancel" hidden>Cancel edit</button>
+            </div>
+          </form>
+          <section class="card table-card">
+            <h2 class="section-title">Registered vehicles</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Registration</th>
+                  <th>Model</th>
+                  <th>Type</th>
+                  <th>Max load</th>
+                  <th>Odometer</th>
+                  <th>Cost</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="vehicleRows"></tbody>
+            </table>
+            <div id="vehicleEmpty" class="empty-state"><b>No vehicles added</b>Use the form to register your first
+              vehicle.</div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
