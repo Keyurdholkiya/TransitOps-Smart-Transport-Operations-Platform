@@ -16,6 +16,10 @@ class DriverRepository:
     def get_by_id(self, driver_id: UUID) -> Driver | None:
         return self.session.get(Driver, driver_id)
 
+    def get_by_id_for_update(self, driver_id: UUID) -> Driver | None:
+        statement = select(Driver).where(Driver.id == driver_id).with_for_update()
+        return self.session.scalar(statement)
+
     def get_by_employee_code(self, employee_code: str) -> Driver | None:
         statement = select(Driver).where(
             Driver.employee_code == employee_code.strip().upper(),

@@ -7,6 +7,7 @@ from app.core.config import settings
 from app.db.base import Base
 from app.models.driver import Driver  # noqa: F401
 from app.models.role import Role  # noqa: F401
+from app.models.trip import Trip  # noqa: F401
 from app.models.user import User  # noqa: F401
 from app.models.vehicle import Vehicle  # noqa: F401
 
