@@ -5,7 +5,7 @@
 
 🚀 A modern fleet and transport management platform built for the **Odoo Hackathon 2026**.
 
-<img src="assets/logo.png" alt="TransitOps Logo" width="180"/>
+<h1>▦</h1>
 
 ![HTML](https://img.shields.io/badge/Frontend-HTML5-orange?style=for-the-badge&logo=html5)
 ![CSS](https://img.shields.io/badge/CSS3-Blue?style=for-the-badge&logo=css3)
