@@ -1,7 +1,7 @@
 from functools import lru_cache
 from typing import Literal
 
-from pydantic import Field
+from pydantic import EmailStr, Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -28,6 +28,19 @@ class Settings(BaseSettings):
     )
 
     secret_key: str = Field(min_length=32)
+
+    jwt_algorithm: Literal["HS256"] = "HS256"
+    jwt_issuer: str = "transitops-api"
+    jwt_audience: str = "transitops-web"
+    access_token_expire_minutes: int = Field(
+        default=30,
+        ge=5,
+        le=1440,
+    )
+
+    initial_admin_email: EmailStr | None = None
+    initial_admin_password: SecretStr | None = None
+    initial_admin_full_name: str = "TransitOps Administrator"
 
     allowed_origins: list[str] = [
         "http://localhost:5173",
