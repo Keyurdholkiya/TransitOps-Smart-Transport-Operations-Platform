@@ -1,7 +1,7 @@
 from functools import lru_cache
 from typing import Literal
 
-from pydantic import Field
+from pydantic import EmailStr, Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -37,6 +37,10 @@ class Settings(BaseSettings):
         ge=5,
         le=1440,
     )
+
+    initial_admin_email: EmailStr | None = None
+    initial_admin_password: SecretStr | None = None
+    initial_admin_full_name: str = "TransitOps Administrator"
 
     allowed_origins: list[str] = [
         "http://localhost:5173",
