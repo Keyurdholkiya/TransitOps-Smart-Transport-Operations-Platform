@@ -25,3 +25,30 @@ class InvalidCredentialsError(AppException):
             code="invalid_credentials",
             message="Invalid email or password.",
         )
+
+
+class UserNotFoundError(AppException):
+    def __init__(self) -> None:
+        super().__init__(
+            status_code=404,
+            code="user_not_found",
+            message="User not found.",
+        )
+
+
+class RoleNotFoundError(AppException):
+    def __init__(self) -> None:
+        super().__init__(
+            status_code=400,
+            code="invalid_role",
+            message="The selected role does not exist.",
+        )
+
+
+class EmailAlreadyExistsError(AppException):
+    def __init__(self) -> None:
+        super().__init__(
+            status_code=409,
+            code="email_already_exists",
+            message="A user with this email already exists.",
+        )
