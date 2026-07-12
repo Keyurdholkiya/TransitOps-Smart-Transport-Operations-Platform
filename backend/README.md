@@ -781,3 +781,76 @@ Later phases will add:
 - Expenses
 - Dashboard KPIs
 - Reports and analytics
+
+## Phase 3: Fleet and Driver Management
+
+Phase 3 introduces the core vehicle and driver management functionality required
+for transport operations and future trip dispatching.
+
+### Vehicle management
+
+TransitOps supports:
+
+- Creating vehicles
+- Listing and filtering vehicles
+- Retrieving individual vehicles
+- Updating vehicle information
+- Updating operational status
+- Unique normalized registration numbers
+- Vehicle type and cargo capacity
+- Odometer tracking
+- Available, On Trip, In Shop and Retired statuses
+
+A retired vehicle cannot return to service. Vehicles can enter On Trip status only
+through the future trip dispatch workflow.
+
+### Driver management
+
+TransitOps supports:
+
+- Creating drivers
+- Listing and filtering drivers
+- Retrieving individual drivers
+- Updating driver and licence information
+- Updating driver status
+- Unique employee codes
+- Unique licence numbers
+- Optional unique email addresses
+- Licence-expiry tracking
+- Available, On Trip, Suspended and Inactive statuses
+
+Drivers with expired licences cannot be marked as available or dispatched.
+Suspended and inactive drivers cannot be dispatched.
+
+### Phase 3 API endpoints
+
+| Method | Endpoint                               | Purpose                  |
+| ------ | -------------------------------------- | ------------------------ |
+| POST   | `/api/v1/vehicles`                     | Create a vehicle         |
+| GET    | `/api/v1/vehicles`                     | List and filter vehicles |
+| GET    | `/api/v1/vehicles/{vehicle_id}`        | Retrieve a vehicle       |
+| PATCH  | `/api/v1/vehicles/{vehicle_id}`        | Update a vehicle         |
+| PATCH  | `/api/v1/vehicles/{vehicle_id}/status` | Change vehicle status    |
+| POST   | `/api/v1/drivers`                      | Create a driver          |
+| GET    | `/api/v1/drivers`                      | List and filter drivers  |
+| GET    | `/api/v1/drivers/{driver_id}`          | Retrieve a driver        |
+| PATCH  | `/api/v1/drivers/{driver_id}`          | Update a driver          |
+| PATCH  | `/api/v1/drivers/{driver_id}/status`   | Change driver status     |
+
+### Phase 3 authorization
+
+- Admin users automatically pass all role checks.
+- Fleet Managers manage vehicles.
+- Safety Officers manage drivers and licence compliance.
+- Dispatchers can view vehicles and drivers.
+- Vehicle and driver status transitions are validated by the backend.
+
+### Database migration
+
+Phase 3 creates the `vehicles` and `drivers` tables.
+
+Apply migrations with:
+
+```powershell
+uv run alembic upgrade head
+```
