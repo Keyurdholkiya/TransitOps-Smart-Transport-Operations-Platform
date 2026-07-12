@@ -1,29 +1,18 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, Query, status
 
-from app.api.dependencies import CurrentUser, DatabaseSession
+from app.api.dependencies import DatabaseSession, require_roles
 from app.models.role import RoleName
 from app.models.user import User
 from app.schemas.user import UserCreate, UserResponse, UserUpdate
 from app.services.user_service import UserService
 
-
-def require_admin(current_user: CurrentUser) -> User:
-    if current_user.role.name != RoleName.ADMIN:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="You do not have permission to perform this action.",
-        )
-
-    return current_user
-
-
 router = APIRouter(
     prefix="/users",
     tags=["Users"],
-    dependencies=[Depends(require_admin)],
+    dependencies=[Depends(require_roles(RoleName.ADMIN))],
 )
 
 

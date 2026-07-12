@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 
 from app.core.tokens import decode_access_token
 from app.db.session import get_db_session
+from app.models.role import RoleName
 from app.models.user import User
 from app.repositories.user_repository import UserRepository
 
@@ -60,3 +61,29 @@ def get_current_user(
 
 
 CurrentUser = Annotated[User, Depends(get_current_user)]
+
+
+class RoleChecker:
+    def __init__(self, *allowed_roles: RoleName) -> None:
+        if not allowed_roles:
+            raise ValueError("At least one allowed role is required.")
+
+        self.allowed_roles = frozenset(allowed_roles)
+
+    def __call__(self, current_user: CurrentUser) -> User:
+        current_role = current_user.role.name
+
+        if current_role == RoleName.ADMIN:
+            return current_user
+
+        if current_role not in self.allowed_roles:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="You do not have permission to perform this action.",
+            )
+
+        return current_user
+
+
+def require_roles(*allowed_roles: RoleName) -> RoleChecker:
+    return RoleChecker(*allowed_roles)
