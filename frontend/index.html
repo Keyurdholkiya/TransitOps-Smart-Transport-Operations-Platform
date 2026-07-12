@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>TransitOps | Sign in</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+  <main class="container">
+    <section class="left-panel">
+      <div>
+        <div class="mark">▦</div>
+        <h1>TransiOps</h1>
+        <p class="subtitle">Smart Transport Operations Platform</p>
+      </div>
+      <div class="features">
+        <h3>One login. Many abilities.</h3>
+        <ul>
+          <li>Fleet Access</li>
+          <li>Dispatch</li>
+          <li>Safety Officer</li>
+          <li>Financial Analyst</li>
+        </ul>
+      </div>
+      <div class="copyright">© TransiOps 2026 &nbsp;·&nbsp; Smart. Safe. Scalable.</div>
+    </section>
+    <section class="right-panel">
+      <div class="login-card">
+        <h2>Sign in to your account</h2>
+        <p>Enter your credentials to continue</p>
+        <form id="loginForm">
+          <div class="input-box"><label>Email address</label><input id="email" type="email" placeholder="you@example.com"
+              required></div>
+          <div class="input-box"><label>Password</label>
+            <div class="password-box"><input id="password" type="password" placeholder="Enter your password"
+                required><span id="togglePassword">◉</span></div>
+          </div>
+          <div class="input-box"><label>Designation</label><select id="role">
+              <option value="Fleet Manager">Fleet Manager</option>
+              <option>Driver / Dispatcher</option>
+              <option>Safety Officer</option>
+              <option>Financial Analyst</option>
+            </select></div>
+          <div class="options"><label><input type="checkbox" checked> Remember me</label><a href="#">Forgot
+              password?</a></div><button id="loginBtn" type="submit">Sign in</button>
+        </form>
+        <div class="demo-copy">
+          <div>Secure access to role-based features</div>
+          <div>Real-time fleet, trip, and alert oversight</div>
+          <div>Unified platform. Better decisions.</div>
+        </div>
+        <aside class="roles-box">
+          <h4>Available roles</h4>
+          <ul>
+            <li>Fleet Manager</li>
+            <li>Driver / Dispatcher</li>
+            <li>Safety Officer</li>
+            <li>Financial Analyst</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <script src="js/auth.js"></script>
+</body>
+
+</html>
