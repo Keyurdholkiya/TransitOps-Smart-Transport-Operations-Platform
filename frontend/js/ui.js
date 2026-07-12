@@ -56,6 +56,10 @@ window.TransitOpsUI = {
   setupHeader() {
     const user = this.currentUser();
     const role = user.role || 'Guest';
+    if (!user.role) {
+      location.href = 'index.html';
+      return false;
+    }
     document.querySelectorAll('#currentRole').forEach(el => {
       const initials = role.split(/\s|\//).map(x => x[0]).join('').slice(0, 2) || 'T';
       el.innerHTML = `Role: ${this.esc(role)} <span class="avatar">${this.esc(initials)}</span>`;

@@ -58,6 +58,22 @@ window.TransitOpsPages.fuel = {
     const otherPanel = TransitOpsUI.$(panelId === '#fuelEntryPanel' ? '#expenseEntryPanel' : '#fuelEntryPanel');
     otherPanel.hidden = true;
     panel.hidden = !panel.hidden;
+  render() {
+    const { $, esc, dateText, money, setEmpty } = TransitOpsUI;
+    const data = TransitOpsData.get();
+    const vs = TransitOpsData.vehiclesById(data);
+    const records = [
+      ...data.fuel.map(x => ({ ...x, kind: 'Fuel' })),
+      ...data.expenses.map(x => ({ ...x, kind: x.type }))
+    ].sort((a, b) => b.date.localeCompare(a.date));
+
+    $('#expenseRows').innerHTML = records.map(x =>
+      `<tr><td>${esc(x.kind)}</td><td>${esc(vs[x.vehicleId]?.registration || 'Deleted')}</td>` +
+      `<td>${dateText(x.date)}</td><td>${x.liters ? `${x.liters} L` : '—'}</td>` +
+      `<td>${money(x.cost)}</td>` +
+      `<td><button class="danger-btn" data-cost-delete="${x.kind === 'Fuel' ? 'fuel' : 'expense'}:${x.id}">Delete</button></td></tr>`
+    ).join('');
+    setEmpty('#expenseRows', '#expenseEmpty', records.length > 0);
   },
 
   init() {
