@@ -1,10 +1,14 @@
 from enum import StrEnum
+from typing import TYPE_CHECKING
 
 from sqlalchemy import Enum, Integer, String, Text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
 from app.models.mixins import TimestampMixin
+
+if TYPE_CHECKING:
+    from app.models.user import User
 
 
 class RoleName(StrEnum):
@@ -42,4 +46,8 @@ class Role(TimestampMixin, Base):
     display_name: Mapped[str] = mapped_column(
         String(100),
         nullable=False,
+    )
+
+    users: Mapped[list["User"]] = relationship(
+        back_populates="role",
     )
