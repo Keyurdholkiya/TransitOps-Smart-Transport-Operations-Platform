@@ -43,6 +43,11 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_origin_regex=(
+        r"https?://(localhost|127\.0\.0\.1)(:\d+)?"
+        if settings.app_env in {"local", "development"}
+        else None
+    ),
 )
 
 app.add_middleware(
