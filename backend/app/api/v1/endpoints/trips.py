@@ -7,6 +7,8 @@ from app.api.dependencies import DatabaseSession, require_roles
 from app.models.role import RoleName
 from app.models.trip_enums import TripStatus, TripType
 from app.schemas.trip import (
+    TripCancellationRequest,
+    TripCompletionRequest,
     TripCreate,
     TripListResponse,
     TripResponse,
@@ -99,3 +101,47 @@ def get_trip(
     session: DatabaseSession,
 ) -> TripResponse:
     return TripService(session).get_trip(trip_id)
+
+
+@router.post(
+    "/{trip_id}/dispatch",
+    response_model=TripResponse,
+    dependencies=[Depends(require_roles(RoleName.DISPATCHER))],
+)
+def dispatch_trip(
+    trip_id: UUID,
+    session: DatabaseSession,
+) -> TripResponse:
+    return TripService(session).dispatch_trip(trip_id)
+
+
+@router.post(
+    "/{trip_id}/complete",
+    response_model=TripResponse,
+    dependencies=[Depends(require_roles(RoleName.DISPATCHER))],
+)
+def complete_trip(
+    trip_id: UUID,
+    completion_data: TripCompletionRequest,
+    session: DatabaseSession,
+) -> TripResponse:
+    return TripService(session).complete_trip(
+        trip_id,
+        completion_data,
+    )
+
+
+@router.post(
+    "/{trip_id}/cancel",
+    response_model=TripResponse,
+    dependencies=[Depends(require_roles(RoleName.DISPATCHER))],
+)
+def cancel_trip(
+    trip_id: UUID,
+    cancellation_data: TripCancellationRequest,
+    session: DatabaseSession,
+) -> TripResponse:
+    return TripService(session).cancel_trip(
+        trip_id,
+        cancellation_data,
+    )

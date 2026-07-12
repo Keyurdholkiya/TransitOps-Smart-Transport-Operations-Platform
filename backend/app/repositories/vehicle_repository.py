@@ -16,6 +16,10 @@ class VehicleRepository:
     def get_by_id(self, vehicle_id: UUID) -> Vehicle | None:
         return self.session.get(Vehicle, vehicle_id)
 
+    def get_by_id_for_update(self, vehicle_id: UUID) -> Vehicle | None:
+        statement = select(Vehicle).where(Vehicle.id == vehicle_id).with_for_update()
+        return self.session.scalar(statement)
+
     def get_by_registration_number(
         self,
         registration_number: str,
