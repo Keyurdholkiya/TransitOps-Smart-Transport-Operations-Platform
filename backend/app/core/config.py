@@ -23,9 +23,9 @@ class Settings(BaseSettings):
     api_v1_prefix: str = "/api/v1"
 
     database_url: str = (
-        "postgresql+psycopg://transitops:transitops@localhost:5432/transitops"
+    "postgresql+psycopg://transitops:transitops@127.0.0.1:5433/transitops"
     )
-
+    
     secret_key: str = Field(min_length=32)
 
     allowed_origins: list[str] = [
