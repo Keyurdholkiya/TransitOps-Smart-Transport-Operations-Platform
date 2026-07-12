@@ -79,6 +79,7 @@ window.TransitOpsPages.analytics = {
 
     this.renderActivityChart(data);
     this.renderCostlyVehicles(rows);
+
   render() {
     const { $, esc, money, setEmpty } = TransitOpsUI;
     const rows = this.reportData();
