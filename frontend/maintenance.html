@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TransitOps | Maintenance</title>
+  <link rel="stylesheet" href="css/global.css">
+</head>
+
+<body data-page="maintenance">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">Transi<b>Ops</b></div>
+      <nav class="nav"><a href="dashboard.html">Dashboard</a><a href="vehicles.html">Vehicles</a><a
+          href="drivers.html">Drivers</a><a href="trips.html">Trips</a><a class="active"
+          href="maintenance.html">Maintenance</a><a href="fuel.html">Fuel & Expenses</a><a
+          href="analytics.html">Reports</a><a href="settings.html">Settings</a></nav>
+    </aside>
+    <main class="main">
+      <header class="topbar"><input class="search" placeholder="Search maintenance...">
+        <div class="user" id="currentRole">Role: — <span class="avatar">T</span></div>
+      </header>
+      <section class="page">
+        <div class="page-head">
+          <div>
+            <h1>Maintenance Logs</h1>
+            <p>Opening a maintenance record moves its vehicle to In Shop and removes it from dispatch.</p>
+          </div>
+        </div>
+        <div class="management">
+          <form id="maintenanceForm" class="card form-card">
+            <h2>New Maintenance Record</h2>
+            <div id="maintenanceNotice" class="notice"></div>
+            <div class="form-grid">
+              <div class="field"><label>Vehicle *</label><select id="maintenanceVehicle" required></select></div>
+              <div class="field"><label>Maintenance type *</label><input id="maintenanceType"
+                  placeholder="Oil change, tyre repair..." required></div>
+              <div class="field"><label>Service date *</label><input id="maintenanceDate" type="date" required></div>
+              <div class="field"><label>Cost (₹) *</label><input id="maintenanceCost" type="number" min="0" required>
+              </div>
+              <div class="field"><label>Notes</label><input id="maintenanceNotes"></div><button class="button"
+                type="submit">Open Maintenance Log</button>
+            </div>
+          </form>
+          <section class="card table-card">
+            <h2 class="section-title">Maintenance records</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Vehicle</th>
+                  <th>Type</th>
+                  <th>Date</th>
+                  <th>Cost</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="maintenanceRows"></tbody>
+            </table>
+            <div id="maintenanceEmpty" class="empty-state"><b>No maintenance logs</b>Create a maintenance record to
+              track services and costs.</div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/vehicles.js"></script>
+  <script src="js/drivers.js"></script>
+  <script src="js/trips.js"></script>
+  <script src="js/pages/maintenance.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
